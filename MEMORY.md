@@ -110,7 +110,7 @@ CivicEye is an AI-powered civic issue reporting and city intelligence platform. 
   - Eradicated dark default themes, purple/neon AI glows, heavy shadows, and visual clutter across the entire codebase.
   - Redesigned all surfaces: Splash screen, Dual Citizen/Admin Login card (`/login`), Citizen Home (`/`), Reporting Wizard steps 1-4 (`/report`), Civic Map (`/map`), Citizen History (`/my-reports`, `/notifications`), Citizen Profile (`/profile`), and Admin Command Center (`/admin`, `/admin/incidents`, `/admin/map`, `/admin/analytics`, `/admin/hub`).
   - Implemented Dual Citizen / Admin login mode switcher on `/login` with real-time municipal verification.
-  - Configured immediate Superadmin clearance for `amismail164@gmail.com` in `roles.ts`, `auth.ts`, `firestore.ts`, and `AuthContext.tsx`.
+  - Administrator email allowlisting is configured through `NEXT_PUBLIC_ADMIN_EMAILS`; no maintainer email is hardcoded in the source.
 - [x] Phase 12: Android Native Application & Mobile PWA Integration
   - Native Android project scaffolding in `./android` powered by Capacitor (`@capacitor/android`, `@capacitor/core`, `@capacitor/cli`).
   - Native plugins configured: `@capacitor/camera`, `@capacitor/geolocation`, `@capacitor/app`, `@capacitor/status-bar`, `@capacitor/splash-screen`.

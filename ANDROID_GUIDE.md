@@ -71,8 +71,7 @@ adb install android/app/build/outputs/apk/debug/app-debug.apk
 
 Any citizen or municipal administrator can also install CivicEye directly from their phone's browser without downloading an APK:
 
-1. On your Android phone, open Chrome and navigate to:
-   **[https://civic-eye-two.vercel.app](https://civic-eye-two.vercel.app)**
+1. On your Android phone, open Chrome and navigate to your deployed Vercel URL.
 2. Tap the browser menu (three vertical dots `⋮` at the top-right).
 3. Tap **"Install app"** or **"Add to Home screen"**.
 4. CivicEye will appear on your Android home screen and in your app drawer as a standalone native app with the official app icon and full-screen experience.

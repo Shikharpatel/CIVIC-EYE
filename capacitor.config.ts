@@ -5,9 +5,9 @@ const config: CapacitorConfig = {
   appName: 'CivicEye',
   webDir: 'public',
   server: {
-    // Connects native Android app directly to our deployed production backend
-    url: 'https://civic-eye-two.vercel.app',
-    cleartext: true,
+    // Replace this with your deployed Vercel URL before building the Android app.
+    url: 'https://YOUR-VERCEL-DEPLOYMENT.vercel.app',
+    cleartext: false,
   },
   android: {
     allowMixedContent: true,

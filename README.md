@@ -4,7 +4,7 @@
 
 ### AI-Powered Civic Issue Reporting & City Intelligence Platform
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-civic--eye--two.vercel.app-10b981?style=for-the-badge&logo=vercel)](https://civic-eye-two.vercel.app)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Shikharpatel%2FCIVIC--EYE-181717?style=for-the-badge&logo=github)](https://github.com/Shikharpatel/CIVIC-EYE)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=for-the-badge&logo=typescript)](https://typescriptlang.org)
 [![Firebase](https://img.shields.io/badge/Firebase-Firestore%20%2B%20Auth-f97316?style=for-the-badge&logo=firebase)](https://firebase.google.com)
@@ -59,8 +59,8 @@ CivicEye eliminates all of these gaps.
 
 | Environment | URL |
 |-------------|-----|
-| **Production** | https://civic-eye-two.vercel.app |
-| **GitHub Repository** | https://github.com/AM-iSMAIL/CIVIC-EYE |
+| **Deployment** | Deploy this repository with Vercel; the project URL is assigned after deployment. |
+| **GitHub Repository** | https://github.com/Shikharpatel/CIVIC-EYE |
 
 ---
 
@@ -490,7 +490,7 @@ src/
 
 ### Prerequisites
 
-- Node.js v18+
+- Node.js v20.9+
 - A Firebase project with Firestore, Authentication (Google provider), and Storage enabled
 - Google Cloud project with Maps JavaScript API and Gemini API enabled
 
@@ -498,7 +498,7 @@ src/
 
 ```bash
 # Clone the repository
-git clone https://github.com/AM-iSMAIL/CIVIC-EYE.git
+git clone https://github.com/Shikharpatel/CIVIC-EYE.git
 cd CIVIC-EYE
 
 # Install dependencies
@@ -544,16 +544,21 @@ NEXT_PUBLIC_FIREBASE_PROJECT_ID=
 NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
 NEXT_PUBLIC_FIREBASE_APP_ID=
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
 
 # ─── Google Maps (Client-side) ───────────────────────────────────────
 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=
+NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID=DEMO_MAP_ID
+
+# ─── Admin accounts (comma-separated Google sign-in emails) ──────────
+NEXT_PUBLIC_ADMIN_EMAILS=
 
 # ─── Gemini AI (Server-side only — NEVER expose via NEXT_PUBLIC_) ────
 GEMINI_API_KEY=
 GEMINI_MODEL=gemini-2.5-flash          # optional override
 
 # ─── Admin Setup (Server-side) ───────────────────────────────────────
-ADMIN_SETUP_SECRET=your-secure-random-secret
+ADMIN_SETUP_SECRET=replace-with-a-long-random-secret
 ```
 
 ---
@@ -564,7 +569,7 @@ To elevate a user to `admin` role:
 
 ```bash
 # Using the CLI script
-node scripts/set-admin.mjs <USER_EMAIL> <ADMIN_SETUP_SECRET>
+node scripts/set-admin.mjs <USER_EMAIL> [admin|citizen]
 
 # Or via the secure API endpoint
 curl -X POST http://localhost:3000/api/admin/set-role \
@@ -574,7 +579,7 @@ curl -X POST http://localhost:3000/api/admin/set-role \
 
 The script updates `users/{uid}.role` to `"admin"` in Firestore. The role is read in real-time via `onSnapshot` — no re-login required.
 
-**Security:** Firestore rules prevent citizens from self-promoting. The `set-role` API endpoint validates `ADMIN_SETUP_SECRET` server-side before any write.
+**Security:** Set a long random `ADMIN_SETUP_SECRET` in `.env.local` and in the deployment environment. Firestore rules prevent citizens from self-promoting; the `set-role` API accepts role changes only when that server-side secret is supplied.
 
 ---
 
@@ -603,7 +608,7 @@ firebase deploy --only firestore:rules
 
 ### Environment Variables on Vercel
 
-Set all variables from `.env.local` in your Vercel project dashboard under **Settings → Environment Variables**.
+Set the Firebase, Maps, Gemini, and admin variables from `.env.local` in your Vercel project dashboard under **Settings → Environment Variables**. Never commit `.env.local` or publish the Gemini API key.
 
 ---
 
