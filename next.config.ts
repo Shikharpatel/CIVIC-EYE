@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Keep Turbopack scoped to this checkout when its parent contains another lockfile.
+  turbopack: {
+    root: process.cwd(),
+  },
   images: {
     remotePatterns: [
       {
@@ -13,7 +17,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'civic-eye-56b8d.firebasestorage.app',
+        hostname: 'civiceye-b1901.firebasestorage.app',
       },
     ],
   },

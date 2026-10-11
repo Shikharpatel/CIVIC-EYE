@@ -343,7 +343,7 @@ export const CivicGoogleMap: React.FC<CivicGoogleMapProps> = ({
               <div className="text-left bg-slate-950 p-3.5 rounded-xl border border-slate-800 text-[11px] text-slate-400 space-y-2">
                 <span className="font-semibold text-slate-200 block">Setup Instructions:</span>
                 <ol className="list-decimal pl-4 space-y-1">
-                  <li>Open Google Cloud Console for project <code className="text-emerald-300 font-mono">civic-eye-56b8d</code></li>
+                  <li>Open the Google Cloud project connected to your Firebase web app</li>
                   <li>Enable the <strong>Maps JavaScript API</strong></li>
                   <li>Create or copy a browser API key</li>
                   <li>Add to <code className="text-emerald-300 font-mono">.env.local</code>:
