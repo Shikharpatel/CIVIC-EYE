@@ -171,7 +171,7 @@ export default function LoginPage() {
           {mode === 'admin' && (
             <div className="mt-4 p-2.5 rounded-xl bg-slate-50 border border-slate-200/70 text-[11px] text-slate-600 flex items-center justify-center gap-2 text-center">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Authorized municipal operators (e.g. <span className="font-mono font-medium text-slate-900">amismail164@gmail.com</span>)</span>
+              <span>Sign in with a Google account authorized for municipal operations.</span>
             </div>
           )}
 

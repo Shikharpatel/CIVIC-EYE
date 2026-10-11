@@ -14,7 +14,7 @@ import {
 import { AdminHeader } from '@/components/admin/AdminHeader';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/common/Card';
 import { useAuth } from '@/context/AuthContext';
-import { DEFAULT_ADMIN_EMAILS } from '@/config/roles';
+import { CONFIGURED_ADMIN_EMAILS } from '@/config/roles';
 
 export default function AdminHubPage() {
   const { currentUser, isAdmin } = useAuth();
@@ -78,7 +78,7 @@ export default function AdminHubPage() {
                 </span>
               </div>
               <p className="text-xs text-slate-600 font-mono mt-0.5">
-                {currentUser?.email || 'amismail164@gmail.com'}
+                {currentUser?.email || 'No account signed in'}
               </p>
             </div>
           </div>
@@ -141,7 +141,7 @@ export default function AdminHubPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="p-4 space-y-3">
-            {DEFAULT_ADMIN_EMAILS.map((email) => (
+            {CONFIGURED_ADMIN_EMAILS.map((email) => (
               <div
                 key={email}
                 className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between gap-3 text-xs"
@@ -155,6 +155,9 @@ export default function AdminHubPage() {
                 </span>
               </div>
             ))}
+            {CONFIGURED_ADMIN_EMAILS.length === 0 && (
+              <p className="text-xs text-slate-500">Set NEXT_PUBLIC_ADMIN_EMAILS in your environment to list authorized accounts.</p>
+            )}
 
             <div className="p-4 rounded-xl bg-slate-50 border border-dashed border-slate-300 text-xs text-slate-600 space-y-1.5 mt-2">
               <div className="flex items-center gap-1.5 font-bold text-slate-800">

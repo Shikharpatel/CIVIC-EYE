@@ -8,6 +8,13 @@
  *   node scripts/set-admin.mjs <uid_or_email> [admin|citizen]
  */
 
+import { existsSync } from 'node:fs';
+
+if (existsSync('.env.local')) {
+  process.loadEnvFile('.env.local');
+}
+
+const adminSecret = process.env.ADMIN_SETUP_SECRET;
 const target = process.argv[2];
 const role = process.argv[3] || 'admin';
 
@@ -16,10 +23,15 @@ if (!target) {
   process.exit(1);
 }
 
+if (!adminSecret) {
+  console.error('❌ Set ADMIN_SETUP_SECRET in .env.local before using this script.');
+  process.exit(1);
+}
+
 const isEmail = target.includes('@');
 const payload = isEmail
-  ? { email: target, role, secret: 'civiceye_admin_secret_dev' }
-  : { uid: target, role, secret: 'civiceye_admin_secret_dev' };
+  ? { email: target, role, secret: adminSecret }
+  : { uid: target, role, secret: adminSecret };
 
 async function setRole() {
   console.log(`Setting role for ${isEmail ? 'Email' : 'UID'}: ${target} -> ${role}...`);

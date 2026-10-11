@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { doc, updateDoc, getDoc, getDocs, collection, query, where, limit, serverTimestamp } from 'firebase/firestore';
 import { db } from '@/services/firebase';
-import { isAdminEmail } from '@/config/roles';
 
-const ADMIN_SECRET = process.env.ADMIN_SETUP_SECRET || 'civiceye_admin_secret_dev';
+const ADMIN_SECRET = process.env.ADMIN_SETUP_SECRET;
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,8 +23,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Protect role elevation: verify admin setup secret or admin email match
-    const isSecretValid = (secret && secret === ADMIN_SECRET) || isAdminEmail(email);
+    // Role elevation requires a server-side secret; an allowlisted email is not proof of identity.
+    const isSecretValid = Boolean(ADMIN_SECRET && typeof secret === 'string' && secret === ADMIN_SECRET);
 
     if (!isSecretValid) {
       return NextResponse.json(
